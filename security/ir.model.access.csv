@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_method_formato_10n_cl_fe_method_formato_10n_cl_fe,method_formato_10n_cl_fe.method_formato_10n_cl_fe,model_method_formato_10n_cl_fe_method_formato_10n_cl_fe,,1,0,0,0
