@@ -340,7 +340,7 @@
                             <p t-if="o.comment" style="font-size:12px !important;">
                                 <strong>Comment:</strong>
                                 <br />
-                                <span t-field="o.comment" />
+                                <span style="max-width:80px;" t-field="o.comment" />
                             </p>
                         </div>
                         <div id="total" t-attf-class="#{'col-4' if report_type != 'html' else 'col-md-5'}">
