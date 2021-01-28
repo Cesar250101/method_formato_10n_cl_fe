@@ -4,9 +4,15 @@
         <t t-set="o" t-value="o.with_context({'lang': 'es_CL', 'exportacion': o.document_class_id.es_exportacion()})" />
         <t t-call="web.basic_layout">
             <style>
-      .table{
-      margin-bottom:0px !important;
-      }
+                .table{
+                margin-bottom:0px !important;
+                }
+                .limitetexto{
+                width: 100px;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                    }
             </style>
             <!-- Multicompany -->
             <t t-if="not o and doc">
@@ -336,11 +342,11 @@
                                 </div>
                             </t>
                         </div>
-                        <div class="col-xs-3">
+                        <div class="col-xs-3 limitetexto">
                             <p t-if="o.comment" style="font-size:12px !important;">
                                 <strong>Comment:</strong>
                                 <br />
-                                <span style="max-width:80px;" t-field="o.comment" />
+                                <span class="limitetexto" style="max-width:80px;" t-field="o.comment" />
                             </p>
                         </div>
                         <div id="total" t-attf-class="#{'col-4' if report_type != 'html' else 'col-md-5'}">
