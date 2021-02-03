@@ -8,11 +8,12 @@
 
     'description': """
         En primera instancia se modifica el formato de dte_external_layuot
-        del modulo l10n_cl_fe
+        del modulo l10n_cl_fe,
+        Agregar un campo calculado que refleja el precio menos el descuento en el detalle de la factura
     """,
 
     'author': "Method ERP",
-    'website': "http://www.mthod.cl",
+    'website': "http://www.method.cl",
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/12.0/odoo/addons/base/data/ir_module_category_data.xml

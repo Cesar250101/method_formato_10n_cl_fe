@@ -271,7 +271,7 @@
                                     t-if="display_discount"
                                     class="text-left"
                                     groups="sale.group_discount_per_so_line"
-                                >Desc.(%)</th>
+                                >Desc.(%)</th>                                
                                 <th class="text-left">SubTotal</th>
                             </tr>
                         </thead>
@@ -286,7 +286,6 @@
                                 </td>
                                 <td style="max-height:8px; line-height:10px !important;">
                                     <span t-field="l.quantity" />
-                                    <span t-field="l.uom_id" groups="uom.group_uom" />
                                 </td>
                                 <td style="max-height:8px; line-height:10px !important;">
                                     <span t-field="l.product_id.default_code" />
