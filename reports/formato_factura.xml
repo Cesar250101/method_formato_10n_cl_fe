@@ -262,7 +262,6 @@
                     <table class="table table-condensed">
                         <thead>
                             <tr style="max-height:8px; line-height:12px; font-size:12px !important; padding:0px;">
-                                <th />
                                 <th>Cantidad</th>
                                 <th>Artículo</th>
                                 <th>Descripción</th>
@@ -281,9 +280,6 @@
                                 t-as="l"
                                 style="max-height:8px;line-height:10px !important; font-size:12px !important;"
                             >
-                                <td style="max-height:8px; line-height:10px !important;">
-                                    <span t-field="l.sequence" />
-                                </td>
                                 <td style="max-height:8px; line-height:10px !important;">
                                     <span t-field="l.quantity" />
                                 </td>
