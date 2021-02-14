@@ -13,6 +13,12 @@
                 text-overflow: ellipsis;
                 overflow: hidden;
                     }
+                .b {
+                      position: absolute;
+                      right: 0;
+                      width: 300px;
+                      height: 120px;
+                    } 
             </style>
             <!-- Multicompany -->
             <t t-if="not o and doc">
@@ -316,6 +322,12 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="row">
+                    <!--<p t-if="o.comment" style="font-size:12px !important;">
+                        <strong>Comment:</strong>
+                            <span class="limitetexto" style="max-width:180px;" t-field="o.comment"/>
+                    </p>-->
+                </div>
                 <div class="clearfix">
                     <div class="row" style="padding: 3px 10px;  border: Black 1px solid;  border-radius: 20px;">
                         <div class="col-5">
@@ -344,7 +356,7 @@
                                 <span class="limitetexto" style="max-width:80px;" t-field="o.comment" />
                             </p>
                         </div>
-                        <div id="total" t-attf-class="#{'col-4' if report_type != 'html' else 'col-md-5'}">
+                        <div id="total" class="col-xs-4 b">
                             <table class="table table-sm">
                                 <t t-if="o.global_descuentos_recargos">
                                     <tr
