@@ -323,10 +323,10 @@
                     </table>
                 </div>
                 <div class="row">
-                    <!--<p t-if="o.comment" style="font-size:12px !important;">
+                    <p t-if="o.comment" style="font-size:12px !important;">
                         <strong>Comment:</strong>
                             <span class="limitetexto" style="max-width:180px;" t-field="o.comment"/>
-                    </p>-->
+                    </p>
                 </div>
                 <div class="clearfix">
                     <div class="row" style="padding: 3px 10px;  border: Black 1px solid;  border-radius: 20px;">
@@ -350,11 +350,11 @@
                             </t>
                         </div>
                         <div class="col-xs-3 limitetexto">
-                            <p t-if="o.comment" style="font-size:12px !important;">
+                            <!--<p t-if="o.comment" style="font-size:12px !important;">
                                 <strong>Comment:</strong>
                                 <br />
                                 <span class="limitetexto" style="max-width:80px;" t-field="o.comment" />
-                            </p>
+                            </p>-->
                         </div>
                         <div id="total" class="col-xs-4 b">
                             <table class="table table-sm">
