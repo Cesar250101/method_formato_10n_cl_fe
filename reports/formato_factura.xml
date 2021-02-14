@@ -45,7 +45,7 @@
                             <img
                                 t-if="logo"
                                 t-att-src="'data:image/png;base64,%s' % to_text(logo)"
-                                style="max-height: 95px;"
+                                style="max-height: 65px;"
                             />
                     </div>
                     <div class="col-xs-4" style="text-align:left;padding-left:15px;">
