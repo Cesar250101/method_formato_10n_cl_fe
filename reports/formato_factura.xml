@@ -107,7 +107,7 @@
                     <div name="company_address" />
                 </div>
             </div>
-            <div class="page" style="padding-top:35px;">
+            <div class="page" style="padding-top:30px;">
                 <div class="row" style="padding: 3px 10px;  border: Black 1px solid;  border-radius: 20px;">
                     <table class="table cl_invoice" style="margin-bottom:0px !important; padding-left:10px;padding-top:10px;">
                         <tbody>
