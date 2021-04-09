@@ -107,7 +107,7 @@
                     <div name="company_address" />
                 </div>
             </div>
-            <div class="page" style="padding-top:55px;">
+            <div class="page" style="padding-top:40px;">
                 <div class="row" style="padding: 3px 10px;  border: Black 1px solid;  border-radius: 20px;">
                     <table class="table cl_invoice" style="margin-bottom:0px !important; padding-left:10px;padding-top:10px;">
                         <tbody>
@@ -212,11 +212,12 @@
                         </tbody>
                     </table>
                 </div>
-                <div name="detalle" style="min-height:500px; max-height:500px; padding-top:5px;">
+                <t t-if="cedible">
+                <div name="detalle" style="min-height:550px; max-height:550px; padding-top:5px;">                    
                     <t t-if="o.referencias">
                         <span style="font-size:8px;"> Documento de Referencia</span>
-                        <div class="row" style="border: 2px solid black; min-height:10px; border-radius: 20px;" name="reference">
-                            <table class="table table-condensed">
+                        <div class="row" style="border: 1px solid black; min-height:10px; border-radius: 20px;" name="reference">
+                            <table class="table table-condensed" style="padding-left:10px;padding-top:10px;">
                                 <thead style="max-height:10px; font-size:8px !important;">
                                     <th style="padding:1px 5px !important;">
                                         <strong>Folio:</strong>
@@ -321,7 +322,121 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
+                    </div>
+                </t>
+                <t t-if="not cedible">
+                <div name="detalle" style="min-height:700px; max-height:700px; padding-top:5px;">                    
+                    <t t-if="o.referencias">
+                        <span style="font-size:8px;"> Documento de Referencia</span>
+                        <div class="row" style="border: 1px solid black; min-height:10px; border-radius: 20px;" name="reference">
+                            <table class="table table-condensed" style="padding-left:10px;padding-top:10px;">
+                                <thead style="max-height:10px; font-size:8px !important;">
+                                    <th style="padding:1px 5px !important;">
+                                        <strong>Folio:</strong>
+                                    </th>
+                                    <th style="padding:1px 5px !important;">
+                                        <strong>Referencia:</strong>
+                                    </th>
+                                    <th style="padding:1px 5px !important;">
+                                        <strong>Motivo/observación:</strong>
+                                    </th>
+                                    <th style="padding:1px 5px !important;">
+                                        <strong>Fecha del documento</strong>
+                                    </th>
+                                </thead>
+                                <tbody t-if="'referencias' in o and o.referencias">
+                                    <t t-foreach="o.referencias" t-as="l">
+                                        <tr style="max-height:8px; font-size:10px !important;">
+                                            <td style="border-top: 0px !important; padding:0px 5px !important;">
+                                                <span t-if="l.origen" t-field="l.origen" />
+                                            </td>
+                                            <td style="border-top: 0px !important; padding:0px 5px !important;">
+                                                <span
+                                                    t-if="l.sii_referencia_TpoDocRef"
+                                                    t-field="l.sii_referencia_TpoDocRef.name"
+                                                />
+                                            </td>
+                                            <td
+                                                name="reference"
+                                                style="border-top:0px !important;padding:0px !important;"
+                                            >
+                                                <t t-if="l.sii_referencia_CodRef"><span
+                                                        t-esc="l.sii_referencia_CodRef[0]"
+                                                    /> <span t-field="l.sii_referencia_CodRef" />: </t>
+                                                <span t-if="l.motivo" t-field="l.motivo" />
+                                            </td>
+                                            <td style="border-top: 0px !important; padding:0px 5px !important;">
+                                                <span t-if="l.fecha_documento" t-field="l.fecha_documento" />
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                    <!-- Is there a discount on at least one line? -->
+                    <t t-set="display_discount" t-value="any([l.discount for l in o.invoice_line_ids])" />
+                    <t t-set="price_included" t-value="o.is_price_included()" />
+                    <div t-if="price_included">Valores IVA incluído</div>
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr style="max-height:8px; line-height:12px; font-size:12px !important; padding:0px;">
+                                <th>Cantidad</th>
+                                <th>Artículo</th>
+                                <th>Descripción</th>
+                                <th class="text-teft">Precio Unitario</th>
+                                <th
+                                    t-if="display_discount"
+                                    class="text-left"
+                                    groups="sale.group_discount_per_so_line"
+                                >Desc.(%)</th>                                
+                                <th class="text-left">SubTotal</th>
+                            </tr>
+                        </thead>
+                        <tbody class="invoice_tbody">
+                            <tr
+                                t-foreach="o.invoice_line_ids.filtered('account_id')"
+                                t-as="l"
+                                style="max-height:8px;line-height:10px !important; font-size:12px !important;"
+                            >
+                                <td style="max-height:8px; line-height:10px !important;">
+                                    <span t-field="l.quantity" />
+                                </td>
+                                <td style="max-height:8px; line-height:10px !important;">
+                                    <span t-field="l.product_id.default_code" />
+                                </td>
+                                <td style="max-height:8px; line-height:10px !important;">
+                                    <span t-field="l.name" />
+                                </td>
+                                <td class="text-left" style="max-height:8px; line-height:10px !important;">
+                                    <span t-esc="o.currency_format(l.price_unit, 'Product Price')"/>
+                                </td>
+                                <td
+                                    t-if="display_discount"
+                                    class="text-right"
+                                    groups="sale.group_discount_per_so_line"
+                                    style="max-height:8px;line-height:10px !important;"
+                                >
+                                    <span t-field="l.discount" />
+                                </td>
+                                <td class="text-left" style="max-height:8px; line-height:10px !important;">
+                                    <span
+                                        t-if="not price_included"
+                                        t-field="l.price_subtotal"
+                                        t-field-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
+                                    />
+                                    <span
+                                        t-if="price_included"
+                                        t-field="l.price_total"
+                                        t-field-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
+                                    />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                </t>
+
                 <div class="row">
                     <p t-if="o.comment" style="font-size:12px !important;">
                         <strong>Comment:</strong>
@@ -379,7 +494,6 @@
                                 <tr
                                     style="max-height:11px; font-size:12px !important;"
                                     name="subtotal"
-                                    t-if="not price_included"
                                 >
                                     <td>
                                         <strong>Subtotal</strong>
@@ -530,14 +644,14 @@
         <t t-call="l10n_cl_fe.dte_invoice_con_pagos" />
         <t t-call="l10n_cl_fe.invoice_cedible" />
     </template>
-    <report
+    <!-- <report
         string="Print Cedible"
         id="action_print_cedible"
         model="account.invoice"
         report_type="qweb-pdf"
         name="l10n_cl_fe.invoice_cedible"
         file="l10n_cl_fe.report_invoice_cedible"
-        attachment_use="True"
+        attachment_use="False"
         attachment="(object.state in ('open','paid')) and ('CED_'+(object.number or '').replace('/','')+'.pdf')"
     />
     <report
@@ -547,9 +661,9 @@
         report_type="qweb-pdf"
         name="l10n_cl_fe.report_invoice_and_cedible"
         file="l10n_cl_fe.report_invoice_and_cedible"
-        attachment_use="True"
+        attachment_use="False"
         attachment="(object.state in ('open','paid')) and ('FyC_'+(object.number or '').replace('/','')+'.pdf')"
-    />
+    /> -->
     <template id="report_ticket">
         <t t-call="web.basic_layout">
             <t t-foreach="docs" t-as="o">
