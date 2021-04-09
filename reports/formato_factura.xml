@@ -553,12 +553,12 @@
                     </div>
                 </div>
                 <t t-if="cedible">
-                    <div class="row" style="padding: 3px 10px;  border: Black 1px solid;  border-radius: 20px;margin-top: 15px;">
+                    <div class="row" style="padding: 3px 10px;  border: Black 1px solid;  border-radius: 20px;margin-top: 15px;font-size:12px;">
                         <table>
-                            <tr><td><strong>Nombre:</strong></td></tr>
-                            <tr><td><strong>R.U.T.:</strong></td></tr>
-                            <tr><td><strong>RECINTO:</strong></td></tr>
-                            <tr><td><strong>FIRMA:</strong></td></tr>
+                            <tr><td>Nombre:</td></tr>
+                            <tr><td>R.u.t.:</td></tr>
+                            <tr><td>Recinto:</td></tr>
+                            <tr><td>Firma:</td></tr>
                         </table>
                     </div>
                     <div class="row">
