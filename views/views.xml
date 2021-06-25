@@ -1,60 +1,94 @@
 <odoo>
   <data>
-    <!-- explicit list view definition -->
-    <!--
-    <record model="ir.ui.view" id="method_formato_10n_cl_fe.list">
-      <field name="name">method_formato_10n_cl_fe list</field>
-      <field name="model">method_formato_10n_cl_fe.method_formato_10n_cl_fe</field>
+
+  <!-- model.name inherit form view -->
+    <!-- model.name inherit form view -->
+    <record id="method_formato_10n_cl_fe.view_supplier_invoice_form" model="ir.ui.view">
+      <field name="name">method.formato.10n.cl.fe.view.supplier.invoice.form</field>
+      <field name="model">account.invoice</field>
+      <field name="inherit_id" ref="l10n_cl_fe.view_supplier_invoice_form"/>
       <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
-        </tree>
+        <xpath expr="//h1[@class='mt0']" position="replace">
+          <field name="use_documents" invisible="1"/>
+        </xpath>        
       </field>
     </record>
-    -->
 
-    <!-- actions opening views on models -->
-    <!--
-    <record model="ir.actions.act_window" id="method_formato_10n_cl_fe.action_window">
-      <field name="name">method_formato_10n_cl_fe window</field>
-      <field name="res_model">method_formato_10n_cl_fe.method_formato_10n_cl_fe</field>
-      <field name="view_mode">tree,form</field>
-    </record>
-    -->
-
-    <!-- server action to the one above -->
-    <!--
-    <record model="ir.actions.server" id="method_formato_10n_cl_fe.action_server">
-      <field name="name">method_formato_10n_cl_fe server</field>
-      <field name="model_id" ref="model_method_formato_10n_cl_fe_method_formato_10n_cl_fe"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": self._name,
-        }
+    <!-- model.name inherit form view -->
+    <record id="method_formato_10n_cl_fe.invoice_supplier_form" model="ir.ui.view">
+      <field name="name">method.formato.10n_cl.fe.invoice.supplier.form</field>
+      <field name="model">account.invoice</field>
+      <field name="inherit_id" ref="account.invoice_supplier_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='partner_id']" position="before">
+            <field name="document_class_id" 
+              string="Tipo Documento : "
+              options="{'no_open': True, 'no_create': True}" 
+              domain="[('id', 'in', document_class_ids)]" 
+              class="oe_inline"/>
+            <field name="sii_document_number" 
+              string="Número"
+              class="oe_inline"/>
+        </xpath>
       </field>
     </record>
-    -->
 
-    <!-- Top menu item -->
-    <!--
-    <menuitem name="method_formato_10n_cl_fe" id="method_formato_10n_cl_fe.menu_root"/>
-    -->
-    <!-- menu categories -->
-    <!--
-    <menuitem name="Menu 1" id="method_formato_10n_cl_fe.menu_1" parent="method_formato_10n_cl_fe.menu_root"/>
-    <menuitem name="Menu 2" id="method_formato_10n_cl_fe.menu_2" parent="method_formato_10n_cl_fe.menu_root"/>
-    -->
-    <!-- actions -->
-    <!--
-    <menuitem name="List" id="method_formato_10n_cl_fe.menu_1_list" parent="method_formato_10n_cl_fe.menu_1"
-              action="method_formato_10n_cl_fe.action_window"/>
-    <menuitem name="Server to list" id="method_formato_10n_cl_fe" parent="method_formato_10n_cl_fe.menu_2"
-              action="method_formato_10n_cl_fe.action_server"/>
-    -->
+
+    <!-- model.name inherit form view -->
+    <record id="method_formato_10n_cl_fe.invoice_form" model="ir.ui.view">
+      <field name="name">method.formato.10n.cl.fe.invoice.form</field>
+      <field name="model">account.invoice</field>
+      <field name="inherit_id" ref="account.invoice_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='partner_id']" position="before">
+          <!--<div attrs="{'invisible': [('state', '=', 'draft'), ('type', 'not in', ['in_invoice', 'in_refund'])]}">-->
+            <!--<field name="document_class_id" 
+              options="{'no_open': True, 'no_create': True}" 
+              domain="[('id', 'in', document_class_ids)]" 
+              attr="'required':[('use_documents', '=', True), ('state', '=', 'draft')],'readonly':['|', ('state', '!=', 'draft'), ('sii_document_number', '&gt;', 0)]}" 
+              class="oe_inline"/> 
+              <span>Número:</span> <field name="number" readonly="1" class="oe_inline"/>-->
+          <!--</div>-->
+          <!--<div attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('type', 'in', ['in_invoice', 'in_refund'])]}">-->
+            <!--<span class="o_form_label" 
+              attrs="{'invisible': ['|', ('state','!=','draft')]}">
+                Tipo Documento :
+            </span>-->
+            <field name="journal_document_class_id" string="Tipo Documento : "
+              attrs="{'invisible':[('use_documents', '=', False)],'required':[('use_documents', '=', True), ('state', '=', 'draft')],'readonly':['|', ('state', '!=', 'draft'), ('sii_document_number', '&gt;', 0)]}" 
+              options="{'no_create': True}" 
+              domain="[('sii_document_class_id', 'in', document_class_ids)]" 
+              style="width: 90%"/> 
+            <!--<span><strong>Número : </strong></span>-->
+            <field name="sequence_number_next" string="Número : "
+              class="oe_inline" 
+              readonly="1" 
+              attrs="{'invisible': [('sii_document_number','&gt;', 0)]}"/>
+            <field name="sii_document_number" 
+              class="oe_inline"
+              readonly="1" 
+              attrs="{'invisible': [('sii_document_number','&lt;=', 0)]}"/>
+            <field name="sequence_number_next_prefix" 
+              invisible="1" 
+              class="oe_inline"/>
+            <field name="number" 
+              readonly="1" 
+              invisible="1" 
+              class="oe_inline"/>
+          <!--</div>-->
+          
+        </xpath>        
+      </field>
+    </record>
+    <!-- model.name inherit form view -->
+    <record id="method_formato_10n_cl_fe.view_invoice_form" model="ir.ui.view">
+      <field name="name">method.formato.10n.cl.fe.view.invoice.form</field>
+      <field name="model">account.invoice</field>
+      <field name="inherit_id" ref="l10n_cl_fe.view_invoice_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//h1[@class='mt0']" position="replace">
+        </xpath>        
+      </field>
+    </record>
   </data>
 </odoo>
