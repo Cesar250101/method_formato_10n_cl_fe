@@ -55,7 +55,7 @@
                 Tipo Documento :
             </span>-->
             <field name="journal_document_class_id" string="Tipo Documento : "
-              attrs="{'invisible':[('use_documents', '=', False)],'required':[('use_documents', '=', True), ('state', '=', 'draft')],'readonly':['|', ('state', '!=', 'draft'), ('sii_document_number', '&gt;', 0)]}" 
+              attrs="{'required':[('use_documents', '=', True), ('state', '=', 'draft')],'readonly':['|', ('state', '!=', 'draft'), ('sii_document_number', '&gt;', 0)]}" 
               options="{'no_create': True}" 
               domain="[('sii_document_class_id', 'in', document_class_ids)]" 
               style="width: 90%"/> 
