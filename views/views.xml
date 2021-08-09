@@ -9,8 +9,8 @@
       <field name="inherit_id" ref="l10n_cl_fe.view_supplier_invoice_form"/>
       <field name="arch" type="xml">
         <xpath expr="//h1[@class='mt0']" position="replace">
-          <field name="use_documents" invisible="1"/>
-        </xpath>        
+          <field name="use_documents"/>
+        </xpath>
       </field>
     </record>
 
@@ -35,31 +35,31 @@
 
 
     <!-- model.name inherit form view -->
-    <record id="method_formato_10n_cl_fe.invoice_form" model="ir.ui.view">
+    <!--<record id="method_formato_10n_cl_fe.invoice_form" model="ir.ui.view">
       <field name="name">method.formato.10n.cl.fe.invoice.form</field>
       <field name="model">account.invoice</field>
       <field name="inherit_id" ref="account.invoice_form"/>
       <field name="arch" type="xml">
         <xpath expr="//field[@name='partner_id']" position="before">
-          <!--<div attrs="{'invisible': [('state', '=', 'draft'), ('type', 'not in', ['in_invoice', 'in_refund'])]}">-->
-            <!--<field name="document_class_id" 
+          <div attrs="{'invisible': [('state', '=', 'draft'), ('type', 'not in', ['in_invoice', 'in_refund'])]}">
+            <field name="document_class_id" 
               options="{'no_open': True, 'no_create': True}" 
               domain="[('id', 'in', document_class_ids)]" 
               attr="'required':[('use_documents', '=', True), ('state', '=', 'draft')],'readonly':['|', ('state', '!=', 'draft'), ('sii_document_number', '&gt;', 0)]}" 
               class="oe_inline"/> 
-              <span>Número:</span> <field name="number" readonly="1" class="oe_inline"/>-->
-          <!--</div>-->
-          <!--<div attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('type', 'in', ['in_invoice', 'in_refund'])]}">-->
-            <!--<span class="o_form_label" 
+              <span>Número:</span> <field name="number" readonly="1" class="oe_inline"/>
+          </div>
+          <div attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('type', 'in', ['in_invoice', 'in_refund'])]}">
+            <span class="o_form_label" 
               attrs="{'invisible': ['|', ('state','!=','draft')]}">
                 Tipo Documento :
-            </span>-->
+            </span>
             <field name="journal_document_class_id" string="Tipo Documento : "
               attrs="{'required':[('use_documents', '=', True), ('state', '=', 'draft')],'readonly':['|', ('state', '!=', 'draft'), ('sii_document_number', '&gt;', 0)]}" 
               options="{'no_create': True}" 
               domain="[('sii_document_class_id', 'in', document_class_ids)]" 
               style="width: 90%"/> 
-            <!--<span><strong>Número : </strong></span>-->
+            <span><strong>Número : </strong></span>
             <field name="sequence_number_next" string="Número : "
               class="oe_inline" 
               readonly="1" 
@@ -75,13 +75,13 @@
               readonly="1" 
               invisible="1" 
               class="oe_inline"/>
-          <!--</div>-->
+          </div>
           
         </xpath>        
       </field>
-    </record>
+    </record>-->
     <!-- model.name inherit form view -->
-    <record id="method_formato_10n_cl_fe.view_invoice_form" model="ir.ui.view">
+    <!--<record id="method_formato_10n_cl_fe.view_invoice_form" model="ir.ui.view">
       <field name="name">method.formato.10n.cl.fe.view.invoice.form</field>
       <field name="model">account.invoice</field>
       <field name="inherit_id" ref="l10n_cl_fe.view_invoice_form"/>
@@ -89,6 +89,6 @@
         <xpath expr="//h1[@class='mt0']" position="replace">
         </xpath>        
       </field>
-    </record>
+    </record>-->
   </data>
 </odoo>
